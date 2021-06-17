@@ -15,7 +15,7 @@ void main() {
       stream: _indexController.stream,
       initialData: 1,
       builder: (_, AsyncSnapshot<int> snapshot) {
-        return PageSwitcher(pageIndex: snapshot.data, children: children);
+        return PageSwitcher(pageIndex: snapshot.data!, children: children);
       },
     );
 
@@ -41,4 +41,4 @@ void main() {
 }
 
 // Mimics an actual app to enable widgets to operate correctly
-Widget testableWidget({@required Widget child}) => MaterialApp(home: child);
+Widget testableWidget({required Widget child}) => MaterialApp(home: child);

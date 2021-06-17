@@ -7,18 +7,17 @@ class PageSwitcher extends StatefulWidget {
   /// constructor. The lifecycye is automatically handled which allows this
   /// widget to be completely declarative.
   const PageSwitcher({
-    Key key,
-    @required this.children,
-    @required this.pageIndex,
+    Key? key,
+    required this.children,
+    required this.pageIndex,
     this.animate = false,
     this.duration = const Duration(milliseconds: 300),
     this.curve = Curves.easeInOut,
-  })  : assert(children != null && children.length >= 2),
+  })  : assert(children.length >= 2),
         assert(
-          pageIndex != null && pageIndex >= 0 && pageIndex < children.length,
+          pageIndex >= 0 && pageIndex < children.length,
           'Page index out of range',
         ),
-        assert(!animate || (duration != null && curve != null)),
         super(key: key);
 
   /// The pages being switched between.
@@ -42,14 +41,8 @@ class PageSwitcher extends StatefulWidget {
 
 class _PageSwitcherState extends State<PageSwitcher> {
   /// The object used to change the page being shown by the [PageView].
-  PageController _pageController;
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialises the page controller with the default page.
-    _pageController = PageController(initialPage: widget.pageIndex);
-  }
+  late final PageController _pageController =
+      PageController(initialPage: widget.pageIndex);
 
   @override
   void didUpdateWidget(PageSwitcher oldWidget) {
